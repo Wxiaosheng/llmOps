@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from flask import Response, jsonify, request
 from injector import inject
 
-from internal.schema.app_schema import AppReq
+from internal.schema.app_schema import AppReq, AppRes
 from internal.service.app_service import AppService
 
 
@@ -23,6 +23,6 @@ class AppHandler:
   
     app = self.app_service.create_app(req)
 
-    res = AppReq.model_validate(app)
+    res = AppRes.model_validate(app)
 
-    return res.model_dump(), 200
+    return jsonify(res.model_dump()), 200
