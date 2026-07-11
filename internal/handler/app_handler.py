@@ -1,7 +1,7 @@
 
 from dataclasses import dataclass
 
-from flask import Response, request
+from flask import Response, jsonify, request
 from injector import inject
 
 from internal.schema.app_schema import AppReq
@@ -20,5 +20,9 @@ class AppHandler:
       req = AppReq.model_validate(request.get_json())
     except Exception as e:
       return {"error": str(e)}, 400
+  
+    app = self.app_service.create_app(req)
 
-    return self.app_service.create_app(req)
+    res = AppReq.model_validate(app)
+
+    return res.model_dump(), 200

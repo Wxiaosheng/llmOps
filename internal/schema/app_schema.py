@@ -5,15 +5,16 @@ from pydantic import (
 
 class AppReq(BaseModel):
   """创建应用请求参数"""
+  model_config = {"from_attributes": True}
 
   name: str = Field(..., max_length=255)
-  description: str | None = Field(..., max_length=1000)
-  icon: str | None = Field(..., max_length=255)
+  description: str | None = Field(None,max_length=1000)
+  icon: str | None = Field(None, max_length=255)
 
 class AppRes(BaseModel):
   """创建应用响应参数"""
 
-  # model_config
+  model_config = {"from_attributes": True}
 
   id: str
   name: str

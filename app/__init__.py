@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from config.config import Config
 from config.injector import injector
@@ -14,6 +15,8 @@ def create_app():
   # 将 Injector 实例注入到 Flask 应用中
   db = injector.get(SQLAlchemy)
   db.init_app(app)
+  # 初始化数据库迁移
+  Migrate(app, db)
 
   # 注册路由
   router = injector.get(Router)

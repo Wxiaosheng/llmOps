@@ -12,7 +12,7 @@ class App(db.Model):
   id: UUID = Column(UUID, primary_key=True)
 
   name: str = Column(String(255), nullable=False, unique=True)
-
+  icon: str | None = Column(String(255), nullable=True)
   description: str | None = Column(String(255), nullable=True)
 
   created_at: str = Column(DateTime, nullable=False)
