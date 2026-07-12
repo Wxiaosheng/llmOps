@@ -1,9 +1,9 @@
-
 from dataclasses import dataclass
 
-from flask import jsonify, request
+from flask import request
 from injector import inject
 
+from internal.common import success_json
 from internal.schema import ChatReq, ChatRes
 from internal.service import ChatService
 
@@ -13,18 +13,8 @@ from internal.service import ChatService
 class ChatHandler:
   chat_service: ChatService
 
-  def openai_chat(self) -> dict:
+  def openai_chat(self):
     """调用 OpenAI 的聊天接口"""
-
-    req = request.get_json()
-
-    try:
-      req = ChatReq.model_validate(req)
-    except Exception as e:
-      return {"error": str(e)}, 400
-
+    req = ChatReq.model_validate(request.get_json())
     res = self.chat_service.openai_chat(req)
-
-    res = ChatRes.model_validate(res)
-
-    return jsonify(res.model_dump()), 200
+    return success_json(data=ChatRes.model_validate(res).model_dump())

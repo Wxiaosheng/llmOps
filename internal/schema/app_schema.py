@@ -1,3 +1,6 @@
+from datetime import datetime
+from uuid import UUID
+
 from pydantic import (
   BaseModel,
   Field,
@@ -18,9 +21,9 @@ class AppRes(BaseModel):
 
   model_config = {"from_attributes": True}
 
-  id: str
+  id: UUID
   name: str
   description: str | None
   icon: str | None
-  created_at: str
-  updated_at: str
+  created_at: datetime
+  updated_at: datetime

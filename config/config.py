@@ -12,3 +12,8 @@ class Config:
   # SQLAlchemy配置
   SQLALCHEMY_DATABASE_URI = "sqlite:///" + path.join(BASE_URL, getenv("SQLALCHEMY_DATABASE_PATH"))
 
+  # openai 
+  OPENAI_BASE_URL=getenv("OPENAI_BASE_URL")
+  OPENAI_API_KEY=getenv("OPENAI_API_KEY")
+
+
