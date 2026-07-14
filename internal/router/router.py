@@ -18,6 +18,7 @@ class Router:
     api_bp = Blueprint('api', __name__, url_prefix='/api/v1')
 
     api_bp.add_url_rule('/openai/chat', view_func=self.chat_handler.openai_chat, methods=['POST'])
+    api_bp.add_url_rule('/openai/chat/stream', view_func=self.chat_handler.openai_chat_stream, methods=['POST'])
 
     api_bp.add_url_rule('/apps', view_func=self.app_handler.create_app, methods=['POST'])
     api_bp.add_url_rule('/apps/<uuid:app_id>', view_func=self.app_handler.get_app, methods=['GET'])
